@@ -33,8 +33,8 @@
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             splitContainer2 = new SplitContainer();
-            dataGridView1 = new DataGridView();
-            richTextBox2 = new RichTextBox();
+            resultado = new DataGridView();
+            consola = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -44,7 +44,7 @@
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)resultado).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -105,35 +105,35 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(dataGridView1);
+            splitContainer2.Panel1.Controls.Add(resultado);
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(richTextBox2);
+            splitContainer2.Panel2.Controls.Add(consola);
             splitContainer2.Size = new Size(979, 411);
             splitContainer2.SplitterDistance = 296;
             splitContainer2.TabIndex = 0;
             // 
-            // dataGridView1
+            // resultado
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(979, 296);
-            dataGridView1.TabIndex = 0;
+            resultado.AllowUserToAddRows = false;
+            resultado.AllowUserToDeleteRows = false;
+            resultado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resultado.Dock = DockStyle.Fill;
+            resultado.Location = new Point(0, 0);
+            resultado.Name = "resultado";
+            resultado.ReadOnly = true;
+            resultado.Size = new Size(979, 296);
+            resultado.TabIndex = 0;
             // 
-            // richTextBox2
+            // consola
             // 
-            richTextBox2.Dock = DockStyle.Fill;
-            richTextBox2.Location = new Point(0, 0);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(979, 111);
-            richTextBox2.TabIndex = 0;
-            richTextBox2.Text = "";
+            consola.Dock = DockStyle.Fill;
+            consola.Location = new Point(0, 0);
+            consola.Name = "consola";
+            consola.Size = new Size(979, 111);
+            consola.TabIndex = 0;
+            consola.Text = "";
             // 
             // Principal
             // 
@@ -155,7 +155,7 @@
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)resultado).EndInit();
             ResumeLayout(false);
         }
 
@@ -165,8 +165,8 @@
         private RichTextBox editor;
         private ToolStrip toolStrip1;
         private SplitContainer splitContainer2;
-        private RichTextBox richTextBox2;
-        private DataGridView dataGridView1;
+        private RichTextBox consola;
+        private DataGridView resultado;
         private ToolStripButton toolStripButton1;
     }
 }

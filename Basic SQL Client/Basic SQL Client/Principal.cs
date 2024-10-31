@@ -14,6 +14,8 @@ namespace Basic_SQL_Client
         
         private void Principal_Load(object sender, EventArgs e)
         {
+            ConexionSQLite conexion = new ConexionSQLite();
+
             r = new Resaltado(editor);
             r.resaltar();
         }
@@ -21,11 +23,11 @@ namespace Basic_SQL_Client
         private void editor_TextChanged(object sender, EventArgs e)
         {
             r.resaltar();
-
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
+
 
         }
     }
