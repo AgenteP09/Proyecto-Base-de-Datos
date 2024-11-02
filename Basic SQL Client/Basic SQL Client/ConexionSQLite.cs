@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using NETCore.Encrypt;
-using SQLitePCL;
+
 //Requiere del paquete NuGet: Microsoft.Data.Sqlite
 namespace Basic_SQL_Client
 {
     public class ConexionSQLite
     {
        private const string archivoBD = "config.bd";
+        public  List<Dictionary<string, string>> conexiones =  new List<Dictionary<string, string>>();
 
         public ConexionSQLite()
         {
@@ -74,6 +76,37 @@ namespace Basic_SQL_Client
             comando.ExecuteNonQuery();
             conexion.Close();
         }
+
+        public void cargarConexiones(ComboBox combo)
+        {
+            SqliteConnection conexion = new SqliteConnection("Data Source=" + archivoBD);
+            conexion.Open();
+            string sql = @"select * from conexion";
+
+            SqliteCommand comando = new SqliteCommand(sql, conexion);
+            
+            SqliteDataReader datos = comando.ExecuteReader();
+            combo.Items.Clear();
+            conexiones.Clear();
+
+            while (datos.Read())
+            {
+                combo.Items.Add(datos.GetString("nombre"));
+                
+                Dictionary<string, string> con = new Dictionary<string, string>();
+                con.Add("nombre", datos.GetString("nombre"));
+                con.Add("usuario", datos.GetString("usuario"));
+                con.Add("pass", datos.GetString("pass"));
+                con.Add("servidor", datos.GetString("servidor"));
+                con.Add("nombreBD", datos.GetString("nombreBD"));
+
+                conexiones.Add(con);
+            }
+
+            conexion.Close();
+        }
+
+
 
     }
 }

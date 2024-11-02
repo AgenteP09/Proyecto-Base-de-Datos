@@ -95,6 +95,7 @@
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(69, 22);
             toolStripButton1.Text = "Ejecutar";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // splitContainer2
             // 
@@ -143,6 +144,7 @@
             Controls.Add(splitContainer1);
             Name = "Principal";
             Text = "Principal";
+            FormClosing += Principal_FormClosing;
             Load += Principal_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

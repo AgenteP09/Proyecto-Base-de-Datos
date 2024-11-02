@@ -1,7 +1,9 @@
 namespace Basic_SQL_Client
 {
-    internal static class Program
+    public static class Program
     {
+        public static string cadenaConexion;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
