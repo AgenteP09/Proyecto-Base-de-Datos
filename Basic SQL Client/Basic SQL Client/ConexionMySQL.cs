@@ -58,12 +58,16 @@ namespace Basic_SQL_Client
                     MySqlCommand comando = new MySqlCommand(SQL,this.conexion);
                     res = comando.ExecuteNonQuery();
                 }
-
+                ConexionSQLite lite = new ConexionSQLite();
+                lite.guardarHistorial("demo", SQL, "SATISFACTORIO");
                 consola.Text += "\n La instruccion ejecutada correctamente. Registros afectados: " + res;
             }
             catch(MySqlException ex)
             {
                 res = -1;
+                ConexionSQLite lite = new ConexionSQLite();
+                String saltoLinea = Environment.NewLine;
+                lite.guardarHistorial("demo", SQL+saltoLinea+" CAUSA: "+ex.Message, "FALLO");
                 consola.Text += "\n La instruccion no pudo ser ejecutada: " + ex.Message;
             }
             finally
@@ -77,7 +81,11 @@ namespace Basic_SQL_Client
 
         public void cerrarConexion()
         {
-            this.conexion.Close(); 
+             if(this.conexion.State == System.Data.ConnectionState.Open)
+            {
+                this.conexion.Close();
+            }
+             
         }
 
      

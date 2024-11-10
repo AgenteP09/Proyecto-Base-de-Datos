@@ -43,7 +43,7 @@ namespace Basic_SQL_Client
             comboBox1.SelectedIndex = -1;
             editar = false;
         }
-
+        bool conexionCorrecta = false;
         private void btnProbar_Click(object sender, EventArgs e)
         {
             string cadenaConexion = ConexionMySQL.construirCadenaConexion(cajaServidor.Text, cajaUsuario.Text, cajaPass.Text, cajaBD.Text);
@@ -56,13 +56,14 @@ namespace Basic_SQL_Client
                 estado.Text = "OK";
                 estado.BackColor = Color.Green;
                 MessageBox.Show("La conexión se realizo satisfactoriamente");
-
+                conexionCorrecta = true;
             }
             catch (MySqlException ex)
             {
                 estado.Text = "NO";
                 estado.BackColor = Color.Red;
                 MessageBox.Show(ex.Message);
+                conexionCorrecta = false;
             }
             finally
             {
@@ -175,9 +176,13 @@ namespace Basic_SQL_Client
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            this.cadenaConexionMySQL = ConexionMySQL.construirCadenaConexion(cajaServidor.Text, cajaUsuario.Text, cajaPass.Text, cajaBD.Text);
-            this.cancelado = false;
-            this.Close();
+            btnProbar_Click(sender, e);
+            if (conexionCorrecta)
+            {
+                this.cadenaConexionMySQL = ConexionMySQL.construirCadenaConexion(cajaServidor.Text, cajaUsuario.Text, cajaPass.Text, cajaBD.Text);
+                this.cancelado = false;
+                this.Close();
+            }
         }
     }
 }

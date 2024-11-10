@@ -49,7 +49,14 @@ namespace Basic_SQL_Client
 
         private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conexion.cerrarConexion();
+            if (conexion != null)
+                conexion.cerrarConexion();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Historial h = new Historial();
+            h.ShowDialog();
         }
     }
 }

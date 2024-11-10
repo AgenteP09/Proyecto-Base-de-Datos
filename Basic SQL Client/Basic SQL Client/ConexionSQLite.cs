@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using MySql.Data.MySqlClient;
 using NETCore.Encrypt;
 
 //Requiere del paquete NuGet: Microsoft.Data.Sqlite
@@ -29,6 +30,14 @@ namespace Basic_SQL_Client
                     nombreBD TEXT)";
                 SqliteCommand comando = new SqliteCommand(tabla, conexion);
                 comando.ExecuteNonQuery();
+                tabla = @" CREATE TABLE historialSQL( 
+                    fecha TEXT NOT NULL,
+                    base TEXT NOT NULL,
+                    sql TEXT NOT NULL,
+                    estado TEXT NOT NULL
+                    )";
+                comando = new SqliteCommand(tabla, conexion);
+                comando.ExecuteNonQuery();
                 conexion.Close();
             }
         }
@@ -46,6 +55,57 @@ namespace Basic_SQL_Client
             comando.Parameters.AddWithValue("@servidor", servidor);
             comando.Parameters.AddWithValue("@nombreBD", nombreBD);
             comando.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public void guardarHistorial(string nombre, string instruccion, string estado)
+        {
+            SqliteConnection conexion = new SqliteConnection("Data Source=" + archivoBD);
+            conexion.Open();
+            string sql = @"insert into historialSQL values(@fecha,@nombre,@instruccion,@estado)";
+            SqliteCommand comando = new SqliteCommand(sql, conexion);
+            comando.Parameters.AddWithValue("@fecha", DateTime.Now);
+            comando.Parameters.AddWithValue("@nombre", nombre);
+            comando.Parameters.AddWithValue("@instruccion", instruccion);
+            comando.Parameters.AddWithValue("@estado", estado);
+            comando.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public void borrarHistorial(string id)
+        {
+            SqliteConnection conexion = new SqliteConnection("Data Source=" + archivoBD);
+            conexion.Open();
+            string sql = @"delete from historialSQL where rowid=@rowid";
+            SqliteCommand comando = new SqliteCommand(sql, conexion);
+            comando.Parameters.AddWithValue("@rowid", id);
+            comando.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void limpiarHistorial(string id)
+        {
+            SqliteConnection conexion = new SqliteConnection("Data Source=" + archivoBD);
+            conexion.Open();
+            string sql = @"delete from historialSQL";
+            SqliteCommand comando = new SqliteCommand(sql, conexion);
+            comando.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public void cargarHistorial(System.Windows.Forms.DataGridView grid)
+        {
+            SqliteConnection conexion = new SqliteConnection("Data Source=" + archivoBD);
+            conexion.Open();
+            string sql = @"select * from historialSQL";
+            SqliteCommand comando = new SqliteCommand(sql, conexion);
+            SqliteDataReader lector = comando.ExecuteReader();
+
+            while(lector.Read())
+            {
+                int r = grid.Rows.Add(lector.GetString(0), lector.GetString(1), lector.GetString(2), lector.GetString(3));
+                grid.Rows[r].DefaultCellStyle.BackColor = lector.GetString(3).CompareTo("SATISFACTORIO")==0 ? Color.LightGreen:Color.LightSalmon;
+            }
+            lector.Close();
             conexion.Close();
         }
 
