@@ -9,7 +9,7 @@ namespace Basic_SQL_Client
 {
     internal class Resaltado
     {
-        private const string reservadas = @"\b(select|insert|into|update|table|create|database|use|delete|show|from)\b";
+        private const string reservadas = @"\b(select|insert|into|update|table|create|database|use|delete|show|from|show|describe)\b";
         private const string funciones = @"\b(year|month|day)\b";
         private const string comentarios = @"(--.*$)";
         private const string cadenas = "'([^'\\\\]|\\\\.)*'|\"([^\"\\\\]|\\\\.)*\"";

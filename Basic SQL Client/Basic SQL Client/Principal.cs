@@ -58,5 +58,20 @@ namespace Basic_SQL_Client
             Historial h = new Historial();
             h.ShowDialog();
         }
+
+        private void importarSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                editor.LoadFile(openFileDialog1.FileName,RichTextBoxStreamType.PlainText);
+            }
+        }
+
+        private void exportarSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
+                editor.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText); 
+            }
+        }
     }
 }
